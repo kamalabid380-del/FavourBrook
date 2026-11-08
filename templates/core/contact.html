@@ -1,0 +1,71 @@
+{% extends "core/base.html" %}
+
+{% block title %}Contact Us | {{ site.brand_name }}{% endblock %}
+{% block description %}Contact {{ site.brand_name }} at {{ site.address }}. Call {{ site.phone }} or email {{ site.email }} for personal shopping, made-to-measure and order enquiries.{% endblock %}
+
+{% block content %}
+
+<section class="max-w-[1200px] mx-auto px-4 sm:px-6 py-10 sm:py-16">
+  <div class="text-center">
+    <p class="text-[10px] tracking-[0.3em] uppercase text-gold">Customer Services</p>
+    <h1 class="font-serif text-3xl sm:text-5xl font-light mt-3">Contact Us</h1>
+    <p class="mt-4 text-sm text-muted leading-relaxed max-w-xl mx-auto">For personal shopping, made-to-measure appointments, press or order enquiries, our London team is happy to help.</p>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 lg:gap-14 mt-12 items-start">
+    <form method="post" class="border border-line p-6 sm:p-10">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+      <div class="border border-wine bg-ivory text-xs text-wine px-4 py-3 mb-6">{{ form.non_field_errors }}</div>
+      {% endif %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        {% for field in form %}
+        <div class="{% if field.name == 'message' %}sm:col-span-2{% endif %}">
+          <label for="{{ field.id_for_label }}" class="block text-[10px] tracking-[0.2em] uppercase text-muted mb-2">{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}<p class="mt-1.5 text-[11px] text-wine">{{ field.errors|striptags }}</p>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
+      <button type="submit" class="mt-8 bg-ink text-white text-[10px] tracking-[0.24em] uppercase px-12 py-4 hover:bg-wine transition-colors">Send Message</button>
+    </form>
+
+    <aside class="bg-ivory border border-line p-6 sm:p-8 space-y-7">
+      <div>
+        <h2 class="text-[10px] tracking-[0.24em] uppercase text-gold mb-3">Flagship Store</h2>
+        <p class="text-xs text-muted leading-relaxed">{{ site.address }}</p>
+        <a href="{% url 'page' 'our-stores' %}" class="inline-block mt-3 text-[10px] tracking-[0.2em] uppercase text-wine underline hover:text-winedark">All Stores</a>
+      </div>
+      <div>
+        <h2 class="text-[10px] tracking-[0.24em] uppercase text-gold mb-3">Telephone</h2>
+        <a href="tel:{{ site.phone }}" class="text-xs hover:text-wine transition-colors">{{ site.phone }}</a>
+        <p class="mt-2 text-[11px] text-muted">Monday to Saturday, 10am &ndash; 6pm</p>
+      </div>
+      <div>
+        <h2 class="text-[10px] tracking-[0.24em] uppercase text-gold mb-3">Email</h2>
+        <a href="mailto:{{ site.email }}" class="text-xs hover:text-wine transition-colors break-all">{{ site.email }}</a>
+      </div>
+      <div>
+        <h2 class="text-[10px] tracking-[0.24em] uppercase text-gold mb-3">Opening Hours</h2>
+        <ul class="text-[11px] text-muted space-y-1.5">
+          <li class="flex justify-between gap-4"><span>Mon &ndash; Fri</span><span class="text-ink">10:00 &ndash; 18:00</span></li>
+          <li class="flex justify-between gap-4"><span>Saturday</span><span class="text-ink">10:00 &ndash; 18:00</span></li>
+          <li class="flex justify-between gap-4"><span>Sunday</span><span class="text-ink">12:00 &ndash; 17:00</span></li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block head %}
+<style>
+  form input[type="text"], form input[type="email"], form input[type="tel"], form textarea {
+    width: 100%; border: 1px solid var(--line); background: #fff; padding: 0.75rem 0.9rem;
+    font-size: 0.8rem; font-family: inherit; color: var(--ink);
+  }
+  form input:focus, form textarea:focus { outline: none; border-color: var(--wine); }
+  form textarea { resize: vertical; }
+</style>
+{% endblock %}

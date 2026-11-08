@@ -1,0 +1,217 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ site.brand_name }} | Luxury Menswear &amp; Womenswear, London{% endblock %}</title>
+  <meta name="description" content="{% block description %}{{ site.about_text }}{% endblock %}">
+  <link rel="canonical" href="{{ request.build_absolute_uri }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{{ site.brand_name }}">
+  <meta property="og:title" content="{% block og_title %}{{ site.brand_name }} | Luxury Menswear &amp; Womenswear, London{% endblock %}">
+  <meta property="og:description" content="{% block og_description %}{{ site.about_text }}{% endblock %}">
+  <meta property="og:url" content="{{ request.build_absolute_uri }}">
+  {% block og_image %}{% if site.logo %}<meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ site.logo.url }}">{% endif %}{% endblock %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#16130f">
+  {% if site.logo %}<link rel="icon" href="{{ site.logo.url }}" type="image/png">{% endif %}
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#16130f',
+            ivory: '#f6f2ea',
+            wine: '#7b2233',
+            winedark: '#5e1a27',
+            gold: '#a8874f',
+            line: '#e3ddd2',
+            muted: '#6f6a61'
+          },
+          fontFamily: {
+            sans: ['Jost', 'sans-serif'],
+            serif: ['"Cormorant Garamond"', 'Georgia', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  {% block head %}{% endblock %}
+</head>
+<body class="bg-white text-ink font-sans antialiased">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <div class="bg-ink text-white text-center text-[10px] tracking-[0.22em] uppercase px-4 py-2.5">
+    <a href="{% url 'page' 'delivery-and-returns' %}" class="inline-block hover:text-gold transition-colors">{{ site.announcement }}</a>
+  </div>
+
+  <header class="bg-white border-b border-line sticky top-0 z-40">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 grid grid-cols-[1fr_auto_1fr] items-center gap-2">
+      <div class="flex items-center">
+        <button id="menu-btn" class="lg:hidden p-2 -ml-2" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" class="w-5 h-5"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+        <a href="{% url 'catalog' %}" class="hidden lg:inline-block text-[10px] tracking-[0.22em] uppercase hover:text-wine transition-colors">Shop All</a>
+      </div>
+
+      <a href="{% url 'home' %}" class="block justify-self-center" aria-label="{{ site.brand_name }} home">
+        {% if site.logo %}
+        <img src="{{ site.logo.url }}" alt="{{ site.brand_name }}" class="h-6 sm:h-8 w-auto" width="1213" height="114">
+        {% else %}
+        <span class="block font-serif text-2xl sm:text-3xl tracking-[0.18em] uppercase">{{ site.brand_name }}</span>
+        {% endif %}
+      </a>
+
+      <div class="flex items-center justify-end gap-3 sm:gap-4">
+        <button id="search-btn" aria-label="Search" aria-expanded="false" aria-controls="search-bar" class="p-1 hover:text-wine transition-colors">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" class="w-[18px] h-[18px]"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        </button>
+        <a href="{% url 'page' 'our-stores' %}" aria-label="Our stores" class="hidden sm:block p-1 hover:text-wine transition-colors">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" class="w-[18px] h-[18px]"><path d="M12 21s7-6.3 7-11a7 7 0 1 0-14 0c0 4.7 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg>
+        </a>
+        <a href="{% url 'cart_detail' %}" aria-label="Basket{% if cart_count %}, {{ cart_count }} items{% endif %}" class="relative p-1 hover:text-wine transition-colors">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" class="w-[18px] h-[18px]"><path d="M5.5 8h13l-1 12h-11l-1-12Z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
+          {% if cart_count %}
+          <span class="absolute -top-1 -right-1 bg-wine text-white text-[9px] min-w-4 h-4 px-1 rounded-full flex items-center justify-center">{{ cart_count }}</span>
+          {% endif %}
+        </a>
+      </div>
+    </div>
+
+    <div id="search-bar" class="hidden border-t border-line bg-ivory">
+      <form action="{% url 'search' %}" method="get" class="max-w-[1400px] mx-auto px-4 sm:px-6 py-4 flex items-center gap-3">
+        <label for="search-input" class="sr-only">Search the collection</label>
+        <input id="search-input" type="search" name="q" value="{{ query|default:'' }}" placeholder="Search waistcoats, dinner jackets, dresses…" class="flex-1 text-sm py-2 px-1 bg-transparent focus:outline-none border-b border-line focus:border-wine">
+        <button type="submit" class="text-[10px] tracking-[0.22em] uppercase text-wine hover:text-winedark">Search</button>
+      </form>
+    </div>
+
+    <nav class="hidden lg:block border-t border-line" aria-label="Main">
+      <div class="max-w-[1400px] mx-auto px-4 sm:px-6 flex justify-center flex-wrap gap-x-7 gap-y-2 py-3 text-[10px] tracking-[0.2em] uppercase">
+        {% for c in nav_categories %}
+        <a href="{% url 'collection' c.slug %}" class="nav-link hover:text-wine transition-colors">{{ c.name }}</a>
+        {% endfor %}
+        <a href="{% url 'page' 'our-stores' %}" class="nav-link text-wine hover:text-winedark transition-colors">Our Stores</a>
+      </div>
+    </nav>
+
+    <div id="mobile-menu" class="hidden lg:hidden border-t border-line bg-white max-h-[75vh] overflow-y-auto">
+      <nav class="px-6 py-6 space-y-4 text-[11px] tracking-[0.2em] uppercase" aria-label="Mobile">
+        <a href="{% url 'catalog' %}" class="block hover:text-wine">Shop All</a>
+        {% for c in nav_categories %}
+        <a href="{% url 'collection' c.slug %}" class="block hover:text-wine">{{ c.name }}</a>
+        {% endfor %}
+        <a href="{% url 'page' 'our-stores' %}" class="block text-wine">Our Stores</a>
+        <a href="{% url 'contact' %}" class="block text-wine">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  {% if messages %}
+  <div class="max-w-[1400px] mx-auto px-4 sm:px-6 mt-4 space-y-2">
+    {% for message in messages %}
+    <p class="border border-line bg-ivory text-xs tracking-wide px-4 py-3">{{ message }}</p>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main id="main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <section class="bg-ivory border-t border-line mt-16 sm:mt-24">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 py-14 sm:py-20 text-center reveal">
+      <h2 class="font-serif text-3xl sm:text-4xl font-light">{{ site.newsletter_heading }}</h2>
+      <p class="mt-3 text-xs sm:text-sm text-muted leading-relaxed">{{ site.newsletter_text }}</p>
+      <form action="{% url 'newsletter' %}" method="post" class="mt-7 flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <label for="newsletter-email" class="sr-only">Email address</label>
+        <input id="newsletter-email" type="email" name="email" required placeholder="Email address" class="flex-1 border border-line bg-white px-4 py-3 text-xs focus:outline-none focus:border-wine">
+        <button type="submit" class="bg-ink text-white text-[10px] tracking-[0.24em] uppercase px-8 py-3.5 hover:bg-wine transition-colors">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="bg-ink text-white">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 py-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+      <div class="sm:col-span-2 lg:col-span-1">
+        {% if site.logo_white %}
+        <img src="{{ site.logo_white.url }}" alt="{{ site.brand_name }}" class="h-6 w-auto mb-5" width="1213" height="114" loading="lazy">
+        {% else %}
+        <p class="font-serif text-2xl tracking-[0.18em] uppercase mb-5">{{ site.brand_name }}</p>
+        {% endif %}
+        <p class="text-xs text-white/60 leading-relaxed max-w-xs">{{ site.tagline }}</p>
+        <div class="flex gap-4 mt-6">
+          {% if site.instagram_url %}
+          <a href="{{ site.instagram_url }}" target="_blank" rel="noopener" aria-label="Instagram" class="text-white/70 hover:text-gold transition-colors">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="w-[18px] h-[18px]"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          {% endif %}
+          {% if site.facebook_url %}
+          <a href="{{ site.facebook_url }}" target="_blank" rel="noopener" aria-label="Facebook" class="text-white/70 hover:text-gold transition-colors">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M13.5 21v-7h2.4l.4-3h-2.8V9.1c0-.9.3-1.5 1.6-1.5h1.3V4.9c-.3 0-1.1-.1-2-.1-2 0-3.4 1.2-3.4 3.5V11H8.5v3H11v7h2.5Z"/></svg>
+          </a>
+          {% endif %}
+          {% if site.pinterest_url %}
+          <a href="{{ site.pinterest_url }}" target="_blank" rel="noopener" aria-label="Pinterest" class="text-white/70 hover:text-gold transition-colors">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="w-[18px] h-[18px]"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.2-2 0-2.9l1.2-5s-.3-.6-.3-1.5c0-1.4.8-2.5 1.9-2.5.9 0 1.3.7 1.3 1.5 0 .9-.6 2.2-.9 3.5-.2 1 .5 1.9 1.6 1.9 1.9 0 3.3-2 3.3-4.9 0-2.6-1.8-4.4-4.4-4.4-3 0-4.8 2.2-4.8 4.6 0 .9.3 1.9.8 2.4.1.1.1.2.1.3l-.3 1.1c0 .2-.2.2-.4.1-1.3-.6-2.1-2.5-2.1-4 0-3.3 2.4-6.3 6.9-6.3 3.6 0 6.4 2.6 6.4 6 0 3.6-2.3 6.5-5.4 6.5-1.1 0-2.1-.6-2.4-1.2l-.7 2.5c-.2.9-.9 2-1.3 2.7A10 10 0 1 0 12 2Z"/></svg>
+          </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <nav class="text-xs space-y-3" aria-label="Shop">
+        <p class="text-[10px] tracking-[0.24em] uppercase text-gold mb-4">Shop</p>
+        {% for c in nav_categories %}
+        <a href="{% url 'collection' c.slug %}" class="block text-white/70 hover:text-white transition-colors">{{ c.name }}</a>
+        {% endfor %}
+      </nav>
+
+      <nav class="text-xs space-y-3" aria-label="Information">
+        <p class="text-[10px] tracking-[0.24em] uppercase text-gold mb-4">Information</p>
+        {% for p in footer_pages %}
+        <a href="{% url 'page' p.slug %}" class="block text-white/70 hover:text-white transition-colors">{{ p.title }}</a>
+        {% endfor %}
+        <a href="{% url 'contact' %}" class="block text-white/70 hover:text-white transition-colors">Contact Us</a>
+      </nav>
+
+      <div class="text-xs space-y-3">
+        <p class="text-[10px] tracking-[0.24em] uppercase text-gold mb-4">Customer Services</p>
+        <p class="text-white/70 leading-relaxed">{{ site.address }}</p>
+        <a href="tel:{{ site.phone }}" class="block text-white/70 hover:text-white transition-colors">{{ site.phone }}</a>
+        <a href="mailto:{{ site.email }}" class="block text-white/70 hover:text-white transition-colors break-all">{{ site.email }}</a>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <p class="text-center text-[10px] tracking-[0.2em] text-white/40 uppercase py-7 px-4">{{ site.footer_note }}</p>
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ClothingStore",
+    "name": "{{ site.brand_name|escapejs }}",
+    "description": "{{ site.about_text|escapejs }}",
+    "telephone": "{{ site.phone|escapejs }}",
+    "email": "{{ site.email|escapejs }}",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "{{ site.address|escapejs }}",
+      "addressCountry": "GB"
+    },
+    "url": "{{ request.scheme }}://{{ request.get_host }}{% url 'home' %}"
+  }
+  </script>
+  <script src="{% static 'js/site.js' %}" defer></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

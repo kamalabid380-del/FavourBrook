@@ -1,0 +1,155 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ site.brand_name }} | Luxury Menswear &amp; Womenswear, London{% endblock %}
+{% block description %}{{ site.about_text }}{% endblock %}
+
+{% block content %}
+
+  {% if panels %}
+  <section class="grid grid-cols-1 sm:grid-cols-2 gap-0 sm:gap-1" aria-label="Featured collections">
+    {% for panel in panels %}
+    <a href="{{ panel.link }}" class="hero-panel group relative block overflow-hidden bg-ivory">
+      <img src="{{ panel.image.url }}" alt="{{ panel.title }}" class="w-full h-[72vh] sm:h-[86vh] object-cover" {% if not forloop.first %}loading="lazy"{% endif %} width="1600" height="1920">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 p-6 sm:p-10 text-center text-white">
+        <p class="text-[10px] tracking-[0.3em] uppercase text-white/80">{{ panel.kicker }}</p>
+        <h2 class="font-serif text-3xl sm:text-5xl font-light mt-2 leading-tight">{{ panel.title }}</h2>
+        <span class="inline-block mt-5 bg-white text-ink text-[10px] tracking-[0.24em] uppercase px-8 py-3 group-hover:bg-gold group-hover:text-white transition-colors">{{ panel.button_label }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% for row in rows %}
+  <section id="row-{{ forloop.counter }}" class="py-14 sm:py-20 reveal">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6">
+      <div class="text-center mb-8">
+        {% if row.kicker %}<p class="text-[10px] tracking-[0.3em] uppercase text-gold">{{ row.kicker }}</p>{% endif %}
+        <h2 class="font-serif text-2xl sm:text-4xl font-light mt-1">{{ row.title }}</h2>
+      </div>
+      <div class="relative">
+        <div class="card-row flex gap-4 sm:gap-6 overflow-x-auto snap-x snap-mandatory pb-2" data-row>
+          {% for product in row.products %}
+          <div class="flex-shrink-0 w-[62%] sm:w-[31%] lg:w-[23%] snap-start">
+            {% include "core/_product_card.html" %}
+          </div>
+          {% endfor %}
+        </div>
+        {% if row.products|length > 3 %}
+        <button data-row-prev aria-label="Scroll left" class="hidden lg:flex absolute -left-3 top-[32%] w-9 h-9 items-center justify-center bg-white border border-line text-lg hover:bg-ink hover:text-white transition-colors">&#8249;</button>
+        <button data-row-next aria-label="Scroll right" class="hidden lg:flex absolute -right-3 top-[32%] w-9 h-9 items-center justify-center bg-white border border-line text-lg hover:bg-ink hover:text-white transition-colors">&#8250;</button>
+        {% endif %}
+      </div>
+      {% if row.button_label %}
+      <div class="text-center mt-9">
+        <a href="{% url 'collection' row.collection.slug %}" class="inline-block border border-ink text-[10px] tracking-[0.24em] uppercase px-9 py-3.5 hover:bg-ink hover:text-white transition-colors">{{ row.button_label }}</a>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+  {% endfor %}
+
+  {% if editorials %}
+  <section id="editorial" class="max-w-[1400px] mx-auto px-2 sm:px-3 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 reveal">
+    {% for card in editorials %}
+    <a href="{{ card.link }}" class="zoom-box group relative block aspect-[3/4] bg-ivory overflow-hidden">
+      <img src="{{ card.image.url }}" alt="{{ card.title }}" loading="lazy" class="w-full h-full object-cover" width="900" height="1200">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 p-6 text-center text-white">
+        <h3 class="font-serif text-2xl sm:text-3xl font-light leading-tight">{{ card.title }}</h3>
+        {% if card.text %}<p class="mt-2 text-[11px] text-white/80 leading-relaxed line-clamp-2">{{ card.text }}</p>{% endif %}
+        <span class="inline-block mt-4 border border-white text-[10px] tracking-[0.24em] uppercase px-7 py-2.5 group-hover:bg-white group-hover:text-ink transition-colors">{{ card.button_label }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if feature %}
+  <section id="the-house" class="max-w-[1400px] mx-auto px-4 sm:px-6 py-16 sm:py-24 reveal">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+      <div class="zoom-box bg-ivory overflow-hidden {% if feature.image_right %}lg:order-2{% endif %}">
+        <img src="{{ feature.image.url }}" alt="{{ feature.title }}" loading="lazy" class="w-full aspect-[4/5] object-cover" width="900" height="1125">
+      </div>
+      <div class="{% if feature.image_right %}lg:order-1{% endif %} text-center lg:text-left max-w-xl mx-auto lg:mx-0">
+        <p class="text-[10px] tracking-[0.3em] uppercase text-gold">The House</p>
+        <h2 class="font-serif text-3xl sm:text-5xl font-light mt-3 leading-tight">{{ feature.title }}</h2>
+        <div class="mt-5 text-sm text-muted leading-relaxed space-y-4 feature-text">{{ feature.text|safe }}</div>
+        <a href="{{ feature.link }}" class="inline-block mt-8 bg-ink text-white text-[10px] tracking-[0.24em] uppercase px-9 py-3.5 hover:bg-wine transition-colors">{{ feature.button_label }}</a>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if wide_hero %}
+  <section class="reveal">
+    <a href="{{ wide_hero.link }}" class="zoom-box group relative block overflow-hidden bg-ivory">
+      <img src="{{ wide_hero.image.url }}" alt="{{ wide_hero.title }}" loading="lazy" class="w-full h-[52vh] sm:h-[75vh] object-cover" width="1600" height="1067">
+      <div class="absolute inset-0 bg-black/20 group-hover:bg-black/30 transition-colors"></div>
+      <div class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-6">
+        <h2 class="font-serif text-3xl sm:text-6xl font-light leading-tight drop-shadow">{{ wide_hero.title }}</h2>
+        <span class="inline-block mt-6 bg-white text-ink text-[10px] tracking-[0.24em] uppercase px-9 py-3.5 group-hover:bg-gold group-hover:text-white transition-colors">{{ wide_hero.button_label }}</span>
+      </div>
+    </a>
+  </section>
+  {% endif %}
+
+  {% if info_cards %}
+  <section id="edits" class="max-w-[1400px] mx-auto px-2 sm:px-3 py-2 sm:py-3 grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 reveal">
+    {% for card in info_cards %}
+    <a href="{{ card.link }}" class="zoom-box group relative block aspect-[4/5] sm:aspect-[3/4] bg-ivory overflow-hidden">
+      <img src="{{ card.image.url }}" alt="{{ card.title }}" loading="lazy" class="w-full h-full object-cover" width="900" height="1200">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-transparent"></div>
+      <div class="absolute inset-x-0 bottom-0 p-6 text-center text-white">
+        <h3 class="font-serif text-2xl sm:text-3xl font-light">{{ card.title }}</h3>
+        <span class="inline-block mt-4 text-[10px] tracking-[0.24em] uppercase border-b border-white/70 pb-1 group-hover:border-gold group-hover:text-gold transition-colors">{{ card.button_label }}</span>
+      </div>
+    </a>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if about %}
+  <section id="about" class="bg-ivory mt-16 sm:mt-24 reveal">
+    <div class="max-w-[1400px] mx-auto grid grid-cols-1 lg:grid-cols-2 items-stretch">
+      <div class="zoom-box overflow-hidden">
+        <img src="{{ about.image.url }}" alt="{{ about.title }}" loading="lazy" class="w-full h-64 sm:h-96 lg:h-full object-cover" width="1600" height="1067">
+      </div>
+      <div class="px-6 sm:px-12 lg:px-16 py-14 sm:py-20 flex flex-col justify-center">
+        <p class="text-[10px] tracking-[0.3em] uppercase text-gold">Est. London</p>
+        <h2 class="font-serif text-3xl sm:text-4xl font-light mt-3">{{ about.title }}</h2>
+        <div class="mt-5 text-sm text-muted leading-relaxed space-y-4">{{ about.text|safe }}</div>
+        <div class="mt-8">
+          <a href="{% url 'page' 'our-stores' %}" class="inline-block border border-ink text-[10px] tracking-[0.24em] uppercase px-9 py-3.5 hover:bg-ink hover:text-white transition-colors">Visit Our Stores</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+  {% if usps %}
+  <section class="max-w-[1400px] mx-auto px-4 sm:px-6 py-14 sm:py-20">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 text-center">
+      {% for usp in usps %}
+      <div class="reveal">
+        <span class="inline-flex items-center justify-center w-11 h-11 mb-4 text-gold" aria-hidden="true">
+          {% if usp.icon == 'shipping' %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" class="w-8 h-8"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="1.8"/><circle cx="17" cy="18" r="1.8"/></svg>
+          {% elif usp.icon == 'globe' %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" class="w-8 h-8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9S14.5 18.4 12 21c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3Z"/></svg>
+          {% elif usp.icon == 'store' %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" class="w-8 h-8"><path d="M4 9h16v11H4zM3 9l1.5-5h15L21 9M9 20v-6h6v6"/></svg>
+          {% else %}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" class="w-8 h-8"><path d="M4 9a8 8 0 0 1 14-3l2 2M20 15a8 8 0 0 1-14 3l-2-2"/><path d="M20 4v4h-4M4 20v-4h4"/></svg>
+          {% endif %}
+        </span>
+        <h3 class="text-[10px] tracking-[0.22em] uppercase">{{ usp.title }}</h3>
+        <p class="mt-2 text-[11px] text-muted leading-relaxed max-w-[24ch] mx-auto">{{ usp.text }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+{% endblock %}

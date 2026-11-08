@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ page.title }} | {{ site.brand_name }}{% endblock %}
+{% block description %}{{ page.body|striptags|truncatechars:155 }}{% endblock %}
+{% block og_title %}{{ page.title }} | {{ site.brand_name }}{% endblock %}
+
+{% block content %}
+
+<article class="max-w-3xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+  <nav class="text-[10px] tracking-[0.16em] uppercase text-muted mb-8" aria-label="Breadcrumb">
+    <a href="{% url 'home' %}" class="hover:text-wine">Home</a>
+    <span class="mx-2" aria-hidden="true">/</span>
+    <span class="text-ink">{{ page.title }}</span>
+  </nav>
+
+  <h1 class="font-serif text-3xl sm:text-5xl font-light text-center leading-tight">{{ page.title }}</h1>
+  <div class="w-12 h-px bg-gold mx-auto my-8" aria-hidden="true"></div>
+  <div class="page-body text-sm text-muted leading-relaxed">{{ page.body|safe }}</div>
+
+  <div class="mt-12 pt-8 border-t border-line text-center">
+    <p class="text-[11px] text-muted">Need something else? Our team is here to help.</p>
+    <a href="{% url 'contact' %}" class="inline-block mt-5 border border-ink text-[10px] tracking-[0.24em] uppercase px-9 py-3.5 hover:bg-ink hover:text-white transition-colors">Contact Us</a>
+  </div>
+</article>
+
+{% endblock %}

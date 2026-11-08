@@ -1,0 +1,86 @@
+[
+ {
+  "slug": "new-arrivals",
+  "name": "New Arrivals",
+  "intro": "<p>The Autumn Winter menswear collection has arrived. Photographed at Neston Park, it runs from the morning of a wedding through to the evening that follows: morning coats and striped trousers, corduroy and flannel suiting for the daylight hours, and dinner jackets and velvet after dark.</p><p>Across tailoring, waistcoats and occasionwear, each piece is designed to move between what the invitation asks for and what you actually want to wear.</p>",
+  "show_in_nav": true,
+  "nav_order": 1
+ },
+ {
+  "slug": "eveningwear",
+  "name": "Eveningwear",
+  "intro": "<p>Favourbrook eveningwear is designed to bring elegance, confidence and individuality to formal occasions. From statement dinner jackets to traditional black tie essentials, each piece is crafted to ensure a refined appearance for both intimate evenings and grand calendar events.</p>",
+  "show_in_nav": true,
+  "nav_order": 2
+ },
+ {
+  "slug": "waistcoats",
+  "name": "Waistcoats",
+  "intro": "<p>Waistcoats sit at the heart of the Favourbrook menswear collection. They remain the most expressive element of formal dress, offering scope for colour, texture and individuality while staying entirely correct.</p><p>Created with the demands of traditional dress codes in mind, from weddings and Royal Ascot to evening events, the collection spans single- and double-breasted styles, piped finishes and elegant shawl lapels. Pastel hues sit alongside richer tones and patterned fabrics, allowing each waistcoat to work either as a focal point or as a considered complement to morning coats, tailoring and eveningwear.</p><p>From understated to expressive, each style is designed to bring clarity and confidence to formal dressing.</p>",
+  "show_in_nav": true,
+  "nav_order": 3
+ },
+ {
+  "slug": "suits",
+  "name": "Suits",
+  "intro": "<p>A well-cut men's suit remains one of the most versatile foundations of a gentleman’s wardrobe. At Favourbrook, our suits combine refined British tailoring with carefully selected fabrics, offering elegant options for everything from summer weddings and garden parties to professional environments and formal occasions.</p><p>The collection spans lightweight linen suits designed for warmer months alongside classic wool suits that transition easily between work and social settings. Lighter tones such as cream, stone and pastel shades lend themselves naturally to daytime celebrations, while navy, olive, charcoal and brown suits provide dependable options for business, formal gatherings and evening engagements.</p><p>For occasions requiring greater formality, explore our dinner suits and dinner jackets, while traditional daytime ceremonies may call for a morning coat.</p>",
+  "show_in_nav": true,
+  "nav_order": 4
+ },
+ {
+  "slug": "smoking-jackets",
+  "name": "Smoking Jackets",
+  "intro": "<p>One of the most distinctive garments in traditional menswear, the smoking jacket occupies a unique position within formal eveningwear. Originally worn after dinner, men’s smoking jackets have evolved into a refined alternative to the dinner jacket, suited to black-tie events, private dinners and occasions where elegance is expected without rigidity.</p><p>Defined by velvet fabrics, shawl collars and decorative detailing, the smoking jacket balances ceremony with ease. Whether worn as part of formal evening dress or as a statement piece for elegant entertaining, it remains a confident expression of timeless British style.</p>",
+  "show_in_nav": true,
+  "nav_order": 5
+ },
+ {
+  "slug": "velvet-jackets",
+  "name": "Velvet Jackets",
+  "intro": "<p>Velvet jackets from Favourbrook define evening elegance through richness of texture, colour and craftsmanship. From velvet dinner jackets and smoking jackets to Nehru and artist styles, each piece balances traditional tailoring with an expressive silhouette. Ideal for black tie, weddings and formal occasions where individuality and refinement are equally important.</p>",
+  "show_in_nav": true,
+  "nav_order": 6
+ },
+ {
+  "slug": "dresses",
+  "name": "Dresses",
+  "intro": "<p>Favourbrook dresses combine luxurious fabrics with elegant silhouettes designed for refined occasionwear. From flowing circle dresses to structured evening styles, each piece is crafted to flatter and endure. Explore distinctive designs created for weddings, formal events and evening occasions.</p>",
+  "show_in_nav": true,
+  "nav_order": 7
+ },
+ {
+  "slug": "womenswear",
+  "name": "Womenswear",
+  "intro": "<p>Classic silhouettes combined with stunning embroidery in a plethora of luxurious fabrics are what make Favourbrook's jackets and coats a cut above the rest. Whether you're going to the Royal Enclosure at Ascot, an evening at the opera, or a glamorous wedding, Favourbrook has just the thing to make the occasion even more memorable.</p>",
+  "show_in_nav": true,
+  "nav_order": 8
+ },
+ {
+  "slug": "wedding-attire",
+  "name": "Wedding Attire",
+  "intro": "<p>Favourbrook wedding attire is designed to bring confidence, elegance and individuality to one of life’s most important occasions. From traditional morning dress to lighter summer tailoring, each piece is crafted to ensure you are impeccably dressed, whatever the setting or season. Thoughtful details, refined fabrics and expert tailoring combine to create wedding looks that feel timeless yet distinctive.</p>",
+  "show_in_nav": true,
+  "nav_order": 9
+ },
+ {
+  "slug": "accessories",
+  "name": "Accessories",
+  "intro": "<p>From beautiful handmade silk ties to flamboyant velvet bow ties via cummerbunds and silk pocket squares, our curation of sophisticated accessories are perfect for those with a discerning eye for detail and a predilection for timeless elegance.</p>",
+  "show_in_nav": true,
+  "nav_order": 10
+ },
+ {
+  "slug": "menswear",
+  "name": "Menswear",
+  "intro": "<p>Favourbrook menswear is rooted in British formalwear traditions, brought up to date through refined tailoring, expressive fabrics and considered detail. The collection is designed for weddings, Royal Ascot and formal occasions throughout the year.</p><p>Morning coats, tailored suits and waistcoats form the backbone of the range, alongside dinner jackets, velvet and smoking jackets for evening wear. Fabrics are selected for both performance and presence, from breathable gabardine wool and linen to rich velvets and patterned silks.</p><p>Each garment reflects an understanding of classic dress codes, interpreted with confidence and individuality rather than rigidity.</p>",
+  "show_in_nav": false,
+  "nav_order": 11
+ },
+ {
+  "slug": "sale",
+  "name": "Sale",
+  "intro": "<p>A selection of Favourbrook pieces at reduced prices. Waistcoats, jackets and accessories from previous seasons, while stocks last.</p>",
+  "show_in_nav": false,
+  "nav_order": 12
+ }
+]
