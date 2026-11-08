@@ -6,7 +6,7 @@ Set sh = CreateObject("WScript.Shell")
 Set fso = CreateObject("Scripting.FileSystemObject")
 root = fso.GetParentFolderName(WScript.ScriptFullName)
 sh.CurrentDirectory = root
-base = "http://favourbrook.com/"
+base = "http://favourbook.org/"
 py = "C:\Users\ABID\AppData\Local\Programs\Python\Python313\python.exe"
 If Not fso.FileExists(py) Then py = "python"
 

@@ -11,11 +11,11 @@ A Django store for Favourbrook — luxury menswear and womenswear, London.
 
 Addresses (this computer only, not a public website):
 
-- Site: http://favourbrook.com/ (also http://127.0.0.6/)
-- Admin: http://favourbrook.com/admin/ — username `admin`, password `FavourBrook@2026`
+- Site: http://favourbook.org/ (also http://127.0.0.6/)
+- Admin: http://favourbook.org/admin/ — username `admin`, password `FavourBrook@2026`
 
-The name `favourbrook.com` is mapped to this machine in the Windows hosts file
-(`127.0.0.6`). Remove those two lines to reach the real London site again.
+The name `favourbook.org` is mapped to this machine in the Windows hosts file
+(`127.0.0.6`). Remove those two lines to reach the real site again.
 
 ## Run manually
 

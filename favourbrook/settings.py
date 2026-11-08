@@ -6,7 +6,7 @@ SECRET_KEY = 'django-insecure-ar25bh!ak*%k_0@a^3g2z9dyrb_ig^%4ta!1f9qi2u0#%7^$hq
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '127.0.0.6', 'favourbrook.com', 'www.favourbrook.com', '[::1]', 'testserver']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '127.0.0.6', 'favourbook.org', 'www.favourbook.org', '[::1]', 'testserver']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
